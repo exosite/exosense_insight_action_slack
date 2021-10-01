@@ -50,6 +50,14 @@ I.add('posttoslack', {
       type = I.constant_types.STRING,
       default = ":cool_doge:"
     },
+    {
+      name = "Level",
+      description = "Select active levels",
+      type = I.constant_types.STRING,
+      enum = {0, 1, 2, 3, 4},
+      enum_presented = {"Normal", "Info", "Warning", "Critical", "Error"},
+      multiple = true
+    }
   },
   fn = function(value, constants)
     post_to_slack.fn(constants["Webhook URL"], constants["Channel"], constants["Pretext"], constants["Title"], value["level"], value["value"], constants["Icon"])

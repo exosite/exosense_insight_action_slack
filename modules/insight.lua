@@ -318,7 +318,7 @@ end
 function Insight.process(request)
   -- log.debug(to_json(request))
   -- Maybe group_id support.
-  local gid = (request.args or {}).group_id or '*'
+  local gid = '*' -- (request.args or {}).group_id or '*'
   local fid = (request.args or {}).function_id
   local found = Insight._functions[gid][fid]
   if found == nil then
@@ -328,7 +328,7 @@ function Insight.process(request)
     }
   end
 
-  save_inlets(request.id or '_', request.data or {})
+  -- save_inlets(request.id or '_', request.data or {})
 
   local results = setmetatable({
     setmetatable({}, {['__type']='slice'})
@@ -342,7 +342,7 @@ function Insight.process(request)
     results = default_raw_fn(found.fn, request)
   end
 
-  save_outlets(request.id or '_', results or {})
+  -- save_outlets(request.id or '_', results or {})
 
   return results
 end

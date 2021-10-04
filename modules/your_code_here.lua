@@ -1,9 +1,15 @@
 local I = require('insight')
-local post_to_slack = require('post_to_slack')
+local helpers = require('helpers')
+
+local function post_to_slack (slackURL, pretext, title, message, color)
+  local body = '{attachments: [{fallback: "ExoSense Slack Action", pretext: "' .. pretext .. '", color: "' ..color.. '", fields: [{title: "' ..title.. '", value: "' ..message..'", short: false}]}]}'
+  response, err = Http.post({url=slackURL, body=body})
+  if err then error(err) end
+end
 
 I.meta({
   name = 'Slack Integrations',
-  description = 'Actions and and some Transforms',
+  description = 'Actions for the Slack API',
   author = "Patrick Levy",
   author_contact = "your@email.address.here",
 })
@@ -15,20 +21,14 @@ I.add('posttoslack', {
   inlets = {
     {
       name = 'Rule State',
-      -- primitive type json, data_type status
-      data_type = 'JSON', -- Inlet for Action is always JSON
+      primitive_type = 'JSON',
+      data_type = 'STATUS',
     }
   },
   constants = {
     {
       name = "Webhook URL",
       description = "The complete slack webhook URL",
-      type = I.constant_types.STRING,
-      default = ""
-    },
-    {
-      name = "Channel",
-      description = "Channel (#delivery-team, @someuser, etc)",
       type = I.constant_types.STRING,
       default = ""
     },
@@ -45,22 +45,37 @@ I.add('posttoslack', {
       default = ""
     },
     {
-      name = "Icon",
-      description = "The slack icon to use",
-      type = I.constant_types.STRING,
-      default = ":cool_doge:"
-    },
-    {
       name = "Level",
-      description = "Select active levels",
-      type = I.constant_types.STRING,
+      description = "Active rule levels",
+      type = I.constant_types.NUMBER,
       enum = {0, 1, 2, 3, 4},
       enum_presented = {"Normal", "Info", "Warning", "Critical", "Error"},
       multiple = true
     }
   },
   fn = function(value, constants)
-    post_to_slack.fn(constants["Webhook URL"], constants["Channel"], constants["Pretext"], constants["Title"], value["level"], value["value"], constants["Icon"])
+    local subscribedLevels = constants["Level"]
+    local currentEventLevel = value["level"]
+    
+    -- Only post to slack if the rule level has been selected
+    if helpers.has_value(subscribedLevels, currentEventLevel) then
+      print('Posting to slack...')
+      local datapoint = value["value"]
+      local color = helpers.get_color_from_level(value["level"])
+      local severity = helpers.get_severity_from_level(value["level"])
+      local message = "Level: " ..severity.. ", Value: " ..datapoint
+
+      post_to_slack(
+        constants["Webhook URL"],
+        constants["Pretext"],
+        constants["Title"],
+        message,
+        color
+      )
+    else
+      print('Rule event occurred but the level is not subscribed to.')
+    end
+
     return 1
   end
 })

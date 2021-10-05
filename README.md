@@ -10,7 +10,6 @@ See https://github.com/exosite/exosense_insight_example_murano_lua for more gene
   - This template already contains a functioning action for sending Slack messages
   - You can make changes to the code or add additional actions to the 'Module' -> 'your_code_here'
   - Copy the domain of your application by clicking 'copy app link' - you will use this in step 2, but will add `/interface` to the end if it
-    - ![image](https://user-images.githubusercontent.com/11744193/136105379-89e78c6c-9a75-4fc4-a694-1b17ba1f6e17.png)
 
 **2. Publish your murano application as an insight service so that you can connect it to ExoSense**
   - In Murano, go to IoT Marketplace and click on Publish on the left
@@ -30,9 +29,7 @@ See https://github.com/exosite/exosense_insight_example_murano_lua for more gene
   - Go to [api.slack.com](https://api.slack.com/)
   - Click "Create an app"
   - Add “Incoming Webhooks” feature
-    - ![image](https://user-images.githubusercontent.com/11744193/136105857-9d036390-1528-467e-b58c-b3948ba78dca.png)
   - Copy the webhook
-    - ![image](https://user-images.githubusercontent.com/11744193/136106155-913c99f6-d93e-4a4a-9d8d-4d8cdcdc17ad.png)
   - Note: Slack's updated API now requires that you set the username, emoji, and channel within the Slack App itself. You can no longer change these within each message being sent.
   
 **5. In ExoSense, create an action definition**

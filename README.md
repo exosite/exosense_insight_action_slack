@@ -1,7 +1,7 @@
 # ExoSense™ Insight Action Slack
 
 ## Overview
-Actions are ExoSense insights that subscribe to rule events and do not produce an outlet signal. They can be built in almost the exact same way as external insight rules and transforms. They are intended to be used to perform work based on a particular rule status being triggered. For example, an action could post data to a spreadsheet, send a slack message, or send data to a custom api all based on a desired rule status being triggered.
+Actions are ExoSense Insights that are subscribed to rule events and do not produce an outlet signal. They can be built in almost the exact same way as External Insight rules and transforms. They are intended to perform an action based on a particular rule status being triggered. For example, an action could post data to a spreadsheet, send a slack message, or send data to a custom API based on a desired rule status being triggered.
 
 See https://github.com/exosite/exosense_insight_example_murano_lua for more general information on exosense insights.
 
@@ -28,9 +28,9 @@ See https://github.com/exosite/exosense_insight_example_murano_lua for more gene
 **4. Create a Slack App that is connected to your organization's Slack Workspace**
   - Go to [api.slack.com](https://api.slack.com/)
   - Click "Create an app"
-  - Add “Incoming Webhooks” feature
-  - Copy the webhook
-  - Note: Slack's updated API now requires that you set the username, emoji, and channel within the Slack App itself. You can no longer change these within each message being sent.
+  - Add “Incoming Webhooks” feature and create a webhook
+  - Copy the webhook URL
+  - Note: Slack's updated API now requires that you set the username and emoji within the Slack App itself. The updated API also does not allow you to send messages to more than channel from a single webhook. You must create a unique webhook for each channel that you'd like to post to.
   
 **5. In ExoSense, create an action definition**
   - Navigate to Configuration -> Actions

@@ -31,5 +31,11 @@ endpoints:
   location: routes
   include: '**/*.lua'
 
+assets:
+  location: assets
+  include: '**/*'
+  exclude: ['**/.*']
+  default_page: index.html
+
 # The format version of this file. This is required.
 formatversion: 1.0.0

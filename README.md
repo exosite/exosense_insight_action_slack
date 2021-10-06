@@ -1,4 +1,4 @@
-# ExoSense™ Insight Action Slack
+# ExoSense™ Insight Action for Slack
 
 ## Overview
 Actions are ExoSense Insights that are subscribed to rule events and do not produce an outlet signal. They can be built in almost the exact same way as External Insight rules and transforms. They are intended to perform an action based on a particular rule status being triggered. For example, an action could post data to a spreadsheet, send a slack message, or send data to a custom API based on a desired rule status being triggered.

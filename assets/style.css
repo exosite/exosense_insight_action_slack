@@ -8,7 +8,7 @@ body {
 }
 
 .mve-image {
-  opacity: .2;
+  height: 150px;
 }
 
 #conMainApp {

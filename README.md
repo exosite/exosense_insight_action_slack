@@ -36,3 +36,8 @@ See https://github.com/exosite/exosense_insight_example_murano_lua for more gene
   - Navigate to Configuration -> Actions
   - Add a new Action
   - Set the Webhook URL using the value copied from the Slack Incoming Webhook configuration
+
+**6. Add your action to a rule**
+  - Navigate to the modify asset page of an asset
+  - Click the more-vert below a rule to add/edit actions
+  - Add a new action using the action definition created in the previous step

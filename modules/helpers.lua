@@ -12,7 +12,7 @@ function Helpers.has_value (tab, val)
 end
 
 -- Get the standard ExoSense Color from the level
-function Helpers.get_color_from_level (level)
+function Helpers.get_color_from_level (level, category)
   local color = "good"
   if (level == 0) -- OK
   then
@@ -23,6 +23,9 @@ function Helpers.get_color_from_level (level)
   elseif (level == 2) -- WARNING
   then
     color = "#ECC800"
+  elseif (level == 3 and category == "timeout")
+  then
+    color = "#808080"
   elseif (level == 3) -- CRITICAL
   then
     color = "#D11515"
@@ -34,7 +37,7 @@ function Helpers.get_color_from_level (level)
 end
 
 -- Convert numeric level to human readable level
-function Helpers.get_severity_from_level (level)
+function Helpers.get_severity_from_level (level, category)
   local severity = "Normal"
   if (level == 0)
   then
@@ -45,6 +48,9 @@ function Helpers.get_severity_from_level (level)
   elseif (level == 2)
   then
     severity = "Warning"
+  elseif (level == 3 and category == "timeout")
+  then
+    severity = "Timeout"
   elseif (level == 3)
   then
     severity = "Critical"

@@ -61,8 +61,9 @@ I.add('posttoslack', {
     if helpers.has_value(subscribedLevels, currentEventLevel) then
       print('Posting to slack...')
       local datapoint = value["value"]
-      local color = helpers.get_color_from_level(value["level"])
-      local severity = helpers.get_severity_from_level(value["level"])
+      local category = value["category"]
+      local color = helpers.get_color_from_level(value["level"], category)
+      local severity = helpers.get_severity_from_level(value["level"], category)
       local message = "Level: " ..severity.. ", Value: " ..datapoint
 
       post_to_slack(

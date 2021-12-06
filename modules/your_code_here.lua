@@ -64,7 +64,7 @@ I.add('posttoslack', {
       local category = value["category"]
       local color = helpers.get_color_from_level(value["level"], category)
       local severity = helpers.get_severity_from_level(value["level"], category)
-      local message = "Level: " ..severity.. ", Value: " ..datapoint
+      local message = "Level: " ..severity.. ", Value: " ..tostring(datapoint)
 
       post_to_slack(
         constants["Webhook URL"],
